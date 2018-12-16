@@ -9,11 +9,11 @@ using MyShop.Core.Models;
 
 namespace MyShop.DataAccess.InMemory
 {
-    class ProductRepository
+    public class ProductRepository
     {
         ObjectCache cache = MemoryCache.Default;
         List<Product> products = new List<Product>();
-        
+
         public ProductRepository()
         {
             products = cache["products"] as List<Product>;
@@ -43,7 +43,7 @@ namespace MyShop.DataAccess.InMemory
             }
             else
             {
-                throw new Exception("Product not found"); 
+                throw new Exception("Product not found");
             }
         }
 
@@ -52,7 +52,7 @@ namespace MyShop.DataAccess.InMemory
             Product productToDelete = products.FirstOrDefault(p => p.Id == id);
             if (productToDelete != null)
             {
-                products.Remove( productToDelete);
+                products.Remove(productToDelete);
             }
             else
             {
@@ -73,7 +73,7 @@ namespace MyShop.DataAccess.InMemory
             }
         }
 
-        public IQueryable Collection()
+        public IQueryable<Product> Collection()
         {
             return products.AsQueryable();
         }
